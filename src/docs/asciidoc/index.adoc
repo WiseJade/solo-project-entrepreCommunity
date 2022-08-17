@@ -1,0 +1,60 @@
+= 전국 사업자 연합 커뮤니티 애플리케이션
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Wise Jade <https://github.com/WiseJade>
+
+v1.0.0, 2022.08.17
+
+***
+== MemberController
+=== 전체 회원 조회
+.curl-request
+include::{snippets}/get-members/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-members/http-request.adoc[]
+
+.request-fields
+include::{snippets}/get-members/request-body.adoc[]
+
+.http-response
+include::{snippets}/get-members/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-members/response-fields.adoc[]
+
+=== 지역으로 회원 조회
+.curl-request
+include::{snippets}/get-members-by-location/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-members-by-location/http-request.adoc[]
+
+.request-fields
+include::{snippets}/get-members-by-location/request-body.adoc[]
+
+.http-response
+include::{snippets}/get-members-by-location/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-members-by-location/response-fields.adoc[]
+
+=== 업종으로 회원 조회
+.curl-request
+include::{snippets}/get-members-by-type/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-members-by-type/http-request.adoc[]
+
+.request-fields
+include::{snippets}/get-members-by-type/request-body.adoc[]
+
+.http-response
+include::{snippets}/get-members-by-type/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-members-by-type/response-fields.adoc[]
