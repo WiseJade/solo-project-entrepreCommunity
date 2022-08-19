@@ -2,6 +2,7 @@ package com.wisejade.memberControllerTest;
 
 import com.google.gson.Gson;
 import com.wisejade.api.member.controller.MemberController;
+import com.wisejade.api.member.dto.MemberPostDto;
 import com.wisejade.api.member.dto.MemberResponseDto;
 import com.wisejade.api.member.entity.City;
 import com.wisejade.api.member.entity.IndustryType;
@@ -18,6 +19,7 @@ import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -30,6 +32,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -117,7 +120,7 @@ public class MemberControllerRestDocsTest {
         // when
         ResultActions actions =
                 mockmvc.perform(get("/v1/members/location")
-                                .param("companyLocation", gyeonggido.getName())
+                                .param("companyLocation", gyeonggido.getCityId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                 );
@@ -156,7 +159,7 @@ public class MemberControllerRestDocsTest {
         // when
         ResultActions actions =
                 mockmvc.perform(get("/v1/members/type")
-                        .param("companyType", service.getName())
+                        .param("companyType", service.getTypeId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                 );
@@ -181,6 +184,63 @@ public class MemberControllerRestDocsTest {
                                 )
                         )
                 );
+    }
+
+    @Test
+    public void postMember() throws Exception{
+        // given
+        Member member = Member.builder()
+                .name("이자바")
+                .password("java123")
+                .sex("f")
+                .companyName("네이버클라우드")
+                .build();
+        member.setCompanyLocation(new City(gyeonggido.getCityId(), ""));
+        member.setCompanyType(new IndustryType(sale.getTypeId(), ""));
+        MemberPostDto postDto = new MemberPostDto("이자바", "java123", "f", "네이버클라우드", sale.getTypeId(), gyeonggido.getCityId());
+
+        given(mapper.memberPostDtoToMember(Mockito.mock(MemberPostDto.class))).willReturn(member);
+        given(memberService.createMember(Mockito.any())).willReturn(member2);
+        given(mapper.memberToMemberResponseDto(Mockito.any())).willReturn(member2Dto);
+
+        String content = gson.toJson(postDto);
+
+        // when
+        ResultActions actions =
+                mockmvc.perform(post("/v1/members")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                );
+
+        // then
+        actions
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.memberId").value(member2Dto.getMemberId()))
+                .andExpect(jsonPath("$.data.name").value(member2Dto.getName()))
+                .andExpect(jsonPath("$.data.sex").value(member2Dto.getSex()))
+                .andExpect(jsonPath("$.data.companyName").value(member2Dto.getCompanyName()))
+                .andExpect(jsonPath("$.data.companyType").isArray())
+                .andExpect(jsonPath("$.data.companyLocation").isArray())
+                .andDo(
+                        document("post-member",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                responseFields(
+                                        List.of(
+                                                fieldWithPath("data").type(JsonFieldType.OBJECT).description("응답 데이터"),
+                                                fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                                fieldWithPath("data.name").type(JsonFieldType.STRING).description("회원 이름"),
+                                                fieldWithPath("data.sex").type(JsonFieldType.STRING).description("회원 성별: m(남) / f(여)"),
+                                                fieldWithPath("data.companyName").type(JsonFieldType.STRING).description("사업체 이름"),
+                                                fieldWithPath("data.companyType").type(JsonFieldType.ARRAY).description("업종 타입"),
+                                                fieldWithPath("data.companyLocation").type(JsonFieldType.ARRAY).description("회사 위치(지역)")
+                                        )
+                                )
+
+                        )
+                );
+
     }
 
 }
