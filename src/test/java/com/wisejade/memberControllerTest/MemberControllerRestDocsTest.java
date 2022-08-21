@@ -19,10 +19,7 @@ import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 
@@ -100,8 +97,12 @@ public class MemberControllerRestDocsTest {
                                                 fieldWithPath("data[].name").type(JsonFieldType.STRING).description("회원 이름"),
                                                 fieldWithPath("data[].sex").type(JsonFieldType.STRING).description("회원 성별: m(남) / f(여)"),
                                                 fieldWithPath("data[].companyName").type(JsonFieldType.STRING).description("사업체 이름"),
-                                                fieldWithPath("data[].companyType").type(JsonFieldType.ARRAY).description("업종 타입"),
-                                                fieldWithPath("data[].companyLocation").type(JsonFieldType.ARRAY).description("회사 위치(지역)")
+                                                fieldWithPath("data[].companyType").type(JsonFieldType.OBJECT).description("업종 타입"),
+                                                fieldWithPath("data[].companyType.typeId").type(JsonFieldType.STRING).description("업종 코드"),
+                                                fieldWithPath("data[].companyType.name").type(JsonFieldType.STRING).description("업종명"),
+                                                fieldWithPath("data[].companyLocation").type(JsonFieldType.OBJECT).description("회사 위치(지역)"),
+                                                fieldWithPath("data[].companyLocation.cityId").type(JsonFieldType.STRING).description("지역 코드"),
+                                                fieldWithPath("data[].companyLocation.name").type(JsonFieldType.STRING).description("지역명")
                                         )
                                 )
                         )
@@ -120,7 +121,7 @@ public class MemberControllerRestDocsTest {
         // when
         ResultActions actions =
                 mockmvc.perform(get("/v1/members/location")
-                                .param("companyLocation", gyeonggido.getCityId())
+                        .param("companyLocation", gyeonggido.getCityId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                 );
@@ -139,8 +140,12 @@ public class MemberControllerRestDocsTest {
                                                 fieldWithPath("data[].name").type(JsonFieldType.STRING).description("회원 이름"),
                                                 fieldWithPath("data[].sex").type(JsonFieldType.STRING).description("회원 성별: m(남) / f(여)"),
                                                 fieldWithPath("data[].companyName").type(JsonFieldType.STRING).description("사업체 이름"),
-                                                fieldWithPath("data[].companyType").type(JsonFieldType.ARRAY).description("업종 타입"),
-                                                fieldWithPath("data[].companyLocation").type(JsonFieldType.ARRAY).description("회사 위치(지역)")
+                                                fieldWithPath("data[].companyType").type(JsonFieldType.OBJECT).description("업종 타입"),
+                                                fieldWithPath("data[].companyType.typeId").type(JsonFieldType.STRING).description("업종 코드"),
+                                                fieldWithPath("data[].companyType.name").type(JsonFieldType.STRING).description("업종명"),
+                                                fieldWithPath("data[].companyLocation").type(JsonFieldType.OBJECT).description("회사 위치(지역)"),
+                                                fieldWithPath("data[].companyLocation.cityId").type(JsonFieldType.STRING).description("지역 코드"),
+                                                fieldWithPath("data[].companyLocation.name").type(JsonFieldType.STRING).description("지역명")
                                         )
                                 )
                         )
@@ -178,8 +183,12 @@ public class MemberControllerRestDocsTest {
                                                 fieldWithPath("data[].name").type(JsonFieldType.STRING).description("회원 이름"),
                                                 fieldWithPath("data[].sex").type(JsonFieldType.STRING).description("회원 성별: m(남) / f(여)"),
                                                 fieldWithPath("data[].companyName").type(JsonFieldType.STRING).description("사업체 이름"),
-                                                fieldWithPath("data[].companyType").type(JsonFieldType.ARRAY).description("업종 타입"),
-                                                fieldWithPath("data[].companyLocation").type(JsonFieldType.ARRAY).description("회사 위치(지역)")
+                                                fieldWithPath("data[].companyType").type(JsonFieldType.OBJECT).description("업종 타입"),
+                                                fieldWithPath("data[].companyType.typeId").type(JsonFieldType.STRING).description("업종 코드"),
+                                                fieldWithPath("data[].companyType.name").type(JsonFieldType.STRING).description("업종명"),
+                                                fieldWithPath("data[].companyLocation").type(JsonFieldType.OBJECT).description("회사 위치(지역)"),
+                                                fieldWithPath("data[].companyLocation.cityId").type(JsonFieldType.STRING).description("지역 코드"),
+                                                fieldWithPath("data[].companyLocation.name").type(JsonFieldType.STRING).description("지역명")
                                         )
                                 )
                         )
@@ -187,7 +196,7 @@ public class MemberControllerRestDocsTest {
     }
 
     @Test
-    public void postMember() throws Exception{
+    public void postMember() throws Exception {
         // given
         Member member = Member.builder()
                 .name("이자바")
@@ -220,8 +229,10 @@ public class MemberControllerRestDocsTest {
                 .andExpect(jsonPath("$.data.name").value(member2Dto.getName()))
                 .andExpect(jsonPath("$.data.sex").value(member2Dto.getSex()))
                 .andExpect(jsonPath("$.data.companyName").value(member2Dto.getCompanyName()))
-                .andExpect(jsonPath("$.data.companyType").isArray())
-                .andExpect(jsonPath("$.data.companyLocation").isArray())
+                .andExpect(jsonPath("$.data.companyType.typeId").value(sale.getTypeId()))
+                .andExpect(jsonPath("$.data.companyType.name").value(sale.getName()))
+                .andExpect(jsonPath("$.data.companyLocation.cityId").value(gyeonggido.getCityId()))
+                .andExpect(jsonPath("$.data.companyLocation.name").value(gyeonggido.getName()))
                 .andDo(
                         document("post-member",
                                 preprocessRequest(prettyPrint()),
@@ -233,8 +244,12 @@ public class MemberControllerRestDocsTest {
                                                 fieldWithPath("data.name").type(JsonFieldType.STRING).description("회원 이름"),
                                                 fieldWithPath("data.sex").type(JsonFieldType.STRING).description("회원 성별: m(남) / f(여)"),
                                                 fieldWithPath("data.companyName").type(JsonFieldType.STRING).description("사업체 이름"),
-                                                fieldWithPath("data.companyType").type(JsonFieldType.ARRAY).description("업종 타입"),
-                                                fieldWithPath("data.companyLocation").type(JsonFieldType.ARRAY).description("회사 위치(지역)")
+                                                fieldWithPath("data.companyType").type(JsonFieldType.OBJECT).description("업종 타입"),
+                                                fieldWithPath("data.companyType.typeId").type(JsonFieldType.STRING).description("업종 코드"),
+                                                fieldWithPath("data.companyType.name").type(JsonFieldType.STRING).description("업종명"),
+                                                fieldWithPath("data.companyLocation").type(JsonFieldType.OBJECT).description("회사 위치(지역)"),
+                                                fieldWithPath("data.companyLocation.cityId").type(JsonFieldType.STRING).description("지역 코드"),
+                                                fieldWithPath("data.companyLocation.name").type(JsonFieldType.STRING).description("지역명")
                                         )
                                 )
 

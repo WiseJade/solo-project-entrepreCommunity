@@ -16,12 +16,4 @@ public class MemberResponseDto {
     private String companyName;
     private IndustryType companyType;
     private City companyLocation;
-
-    public List<String> getCompanyType() {
-        return List.of(companyType.getTypeId(), companyType.getName());
-    }
-
-    public List<String> getCompanyLocation() {
-        return List.of(companyLocation.getCityId(), companyLocation.getName());
-    }
 }

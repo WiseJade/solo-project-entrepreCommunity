@@ -38,7 +38,6 @@ public class MemberService {
         verifyExistsCompanyName(member.getCompanyName());
 
 
-
         Member createdMember = memberRepository.save(member);
         return createdMember;
     }

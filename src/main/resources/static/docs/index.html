@@ -501,7 +501,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 844
+Content-Length: 1132
 
 {
   "data" : [ {
@@ -509,29 +509,53 @@ Content-Length: 844
     "name" : "김코딩",
     "sex" : "m",
     "companyName" : "프로젝트스테이츠",
-    "companyType" : [ "005", "서비스업" ],
-    "companyLocation" : [ "001", "서울" ]
+    "companyType" : {
+      "typeId" : "005",
+      "name" : "서비스업"
+    },
+    "companyLocation" : {
+      "cityId" : "001",
+      "name" : "서울"
+    }
   }, {
     "memberId" : 2,
     "name" : "이자바",
     "sex" : "f",
     "companyName" : "이클립스",
-    "companyType" : [ "002", "도소매업" ],
-    "companyLocation" : [ "002", "경기도" ]
+    "companyType" : {
+      "typeId" : "002",
+      "name" : "도소매업"
+    },
+    "companyLocation" : {
+      "cityId" : "002",
+      "name" : "경기도"
+    }
   }, {
     "memberId" : 3,
     "name" : "박스프링",
     "sex" : "m",
     "companyName" : "네이버클라우드",
-    "companyType" : [ "005", "서비스업" ],
-    "companyLocation" : [ "002", "경기도" ]
+    "companyType" : {
+      "typeId" : "005",
+      "name" : "서비스업"
+    },
+    "companyLocation" : {
+      "cityId" : "002",
+      "name" : "경기도"
+    }
   }, {
     "memberId" : 4,
     "name" : "황디코",
     "sex" : "m",
     "companyName" : "카카오이커머스",
-    "companyType" : [ "002", "도소매업" ],
-    "companyLocation" : [ "001", "서울" ]
+    "companyType" : {
+      "typeId" : "002",
+      "name" : "도소매업"
+    },
+    "companyLocation" : {
+      "cityId" : "001",
+      "name" : "서울"
+    }
   } ]
 }</code></pre>
 </div>
@@ -578,13 +602,33 @@ Content-Length: 844
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">업종 타입</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType.typeId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종명</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회사 위치(지역)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation.cityId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역명</p></td>
 </tr>
 </tbody>
 </table>
@@ -619,7 +663,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 429
+Content-Length: 573
 
 {
   "data" : [ {
@@ -627,15 +671,27 @@ Content-Length: 429
     "name" : "이자바",
     "sex" : "f",
     "companyName" : "이클립스",
-    "companyType" : [ "002", "도소매업" ],
-    "companyLocation" : [ "002", "경기도" ]
+    "companyType" : {
+      "typeId" : "002",
+      "name" : "도소매업"
+    },
+    "companyLocation" : {
+      "cityId" : "002",
+      "name" : "경기도"
+    }
   }, {
     "memberId" : 3,
     "name" : "박스프링",
     "sex" : "m",
     "companyName" : "네이버클라우드",
-    "companyType" : [ "005", "서비스업" ],
-    "companyLocation" : [ "002", "경기도" ]
+    "companyType" : {
+      "typeId" : "005",
+      "name" : "서비스업"
+    },
+    "companyLocation" : {
+      "cityId" : "002",
+      "name" : "경기도"
+    }
   } ]
 }</code></pre>
 </div>
@@ -682,13 +738,33 @@ Content-Length: 429
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">업종 타입</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType.typeId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종명</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회사 위치(지역)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation.cityId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역명</p></td>
 </tr>
 </tbody>
 </table>
@@ -723,7 +799,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 644
+Content-Length: 860
 
 {
   "data" : [ {
@@ -731,22 +807,40 @@ Content-Length: 644
     "name" : "김코딩",
     "sex" : "m",
     "companyName" : "프로젝트스테이츠",
-    "companyType" : [ "005", "서비스업" ],
-    "companyLocation" : [ "001", "서울" ]
+    "companyType" : {
+      "typeId" : "005",
+      "name" : "서비스업"
+    },
+    "companyLocation" : {
+      "cityId" : "001",
+      "name" : "서울"
+    }
   }, {
     "memberId" : 3,
     "name" : "박스프링",
     "sex" : "m",
     "companyName" : "네이버클라우드",
-    "companyType" : [ "005", "서비스업" ],
-    "companyLocation" : [ "002", "경기도" ]
+    "companyType" : {
+      "typeId" : "005",
+      "name" : "서비스업"
+    },
+    "companyLocation" : {
+      "cityId" : "002",
+      "name" : "경기도"
+    }
   }, {
     "memberId" : 4,
     "name" : "황디코",
     "sex" : "m",
     "companyName" : "카카오이커머스",
-    "companyType" : [ "002", "도소매업" ],
-    "companyLocation" : [ "001", "서울" ]
+    "companyType" : {
+      "typeId" : "002",
+      "name" : "도소매업"
+    },
+    "companyLocation" : {
+      "cityId" : "001",
+      "name" : "서울"
+    }
   } ]
 }</code></pre>
 </div>
@@ -793,13 +887,33 @@ Content-Length: 644
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">업종 타입</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType.typeId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyType.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종명</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회사 위치(지역)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation.cityId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].companyLocation.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역명</p></td>
 </tr>
 </tbody>
 </table>
@@ -859,7 +973,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 213
+Content-Length: 285
 
 {
   "data" : {
@@ -867,8 +981,14 @@ Content-Length: 213
     "name" : "이자바",
     "sex" : "f",
     "companyName" : "이클립스",
-    "companyType" : [ "002", "도소매업" ],
-    "companyLocation" : [ "002", "경기도" ]
+    "companyType" : {
+      "typeId" : "002",
+      "name" : "도소매업"
+    },
+    "companyLocation" : {
+      "cityId" : "002",
+      "name" : "경기도"
+    }
   }
 }</code></pre>
 </div>
@@ -915,13 +1035,33 @@ Content-Length: 213
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.companyType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">업종 타입</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.companyType.typeId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.companyType.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업종명</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.companyLocation</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회사 위치(지역)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.companyLocation.cityId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역 코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.companyLocation.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역명</p></td>
 </tr>
 </tbody>
 </table>

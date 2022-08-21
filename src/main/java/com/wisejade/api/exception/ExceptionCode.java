@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ExceptionCode {
     MEMBER_NOT_FOUND(404, "Member not found"),
-    COMPANYNAME_EXISTS(409, "Company name exists");
+    COMPANYNAME_EXISTS(409, "Company name exists"),
+    CITY_NOT_FOUND(404, "CityCode not found");
 
     @Getter
     private int status;
